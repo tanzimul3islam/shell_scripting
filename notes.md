@@ -41,8 +41,30 @@
 
     `sed -i "${line_number}s/.*/new_content/" file`
 
+11. `awk '{action}' filename`
 
+    fruits.csv
 
+    1 mango   1000  1kg  \
+    2 banana  500   2kg  \
+    3 apple   900   1kg
+
+    `awk '{print $2}' fruits.txt` this command will print 2 number column of fruits.txt file.
+
+     ans:
+    
+     mango \
+     banana \
+     apple
+
+    `cat fruits.csv | grep banana | awk '{print $2}' `  
+
+    `cat` command output will be **full content** of fruits.csv file and we are piping the output into `grep` command and grep command will search **a line** where is banana present then `awk` command will 
+    find **column**
+
+    ans:\
+    500
+         
 ---
        run script file: bash  filename
        debug and run script file: bash -v filename

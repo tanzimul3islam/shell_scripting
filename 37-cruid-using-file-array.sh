@@ -15,9 +15,12 @@ display_fruits(){
 }
 
 create_fruit(){
-    local fruit
-    read -p "Enter the fruit to add: " fruit
-    echo "$fruit" >> $filename
+    declare -A fruit
+    echo "Enter the fruit to add"
+    read -p "Enter the fruit name : " fruit[name]
+    read -p "Enter the fruit id : " fruit[id]
+    read -p "Enter the fruit price : " fruit[price]
+    echo "${fruit[id]}  ${fruit[name]}    ${fruit[price]}" >> $filename
     echo "$fruit added"
     display_fruits
 }
@@ -34,12 +37,15 @@ update_fruit(){
 
     if [[ $p -ge 1 && $p -le $( wc -l < $filename ) ]] ; then
 
-        local newFruit
-        read -p "Enter new fruit name: " newFruit
+        declare -A fruit
+        echo "Enter the fruit to update"
+        read -p "Enter the fruit name : " fruit[name]
+        read -p "Enter the fruit id : " fruit[id]
+        read -p "Enter the fruit price : " fruit[price]
 
-        sed -i "${p}s/.*/$newFruit/" $filename
+        sed -i "${p}s/.*/${fruit[id]}  ${fruit[name]}    ${fruit[price]}/" $filename
 
-        echo "Fruits at position $p updated fruit $newFruit"
+        echo "Fruits at position $p updated fruit ${fruit[name]}"
         display_fruits
     else
         echo "invalid index! try again."
